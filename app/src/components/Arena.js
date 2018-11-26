@@ -16,42 +16,42 @@ class Arena extends React.Component {
     }
     console.log('long check usersssss', this.props.usersOnline);
     return (
-      <section class="arena">
-        <div class="col span-2-of-8">
-          <div class="arena__sidebar">
-            <div class="arena__sidebar--change-page">
-              <i class="fas fa-angle-double-left arena__sidebar--change-page--icon" />
+      <section className="arena">
+        <div className="col span-2-of-8">
+          <div className="arena__sidebar">
+            <div className="arena__sidebar--change-page">
+              <i className="fas fa-angle-double-left arena__sidebar--change-page--icon" />
               Page
-              <i class="fas fa-angle-double-right arena__sidebar--change-page--icon" />
+              <i className="fas fa-angle-double-right arena__sidebar--change-page--icon" />
             </div>
             <img
-              class="arena__sidebar--img"
+              className="arena__sidebar--img"
               src="img/pencil_warrior-2-pts.png"
               alt=""
             />
           </div>
         </div>
-        <div class="col span-5-of-8 arena__place">
+        <div className="col span-5-of-8 arena__place">
 
           {this.props.usersOnline.map(user => (
 
-            <div class="card">
-              <div class="card__avatar">
+            <div className="card" key={user.uid}>
+              <div className="card__avatar">
                 <img
-                  class="card__avatar--img"
+                  className="card__avatar--img"
                   src="img/person1.png"
                   alt="avatar"
                 />
               </div>
-              <div class="card__name">Vipmath171</div>
-              <div class="card__btn btn">
-                <div class="card__btn--icon" onClick={()=>this.handleClick(user)}>Challenge</div>
+              <div className="card__name">Vipmath171</div>
+              <div className="card__btn btn">
+                <div className="card__btn--icon" onClick={()=>this.handleClick(user)}>Challenge</div>
               </div>
             </div>
 
           ))}
         </div>
-        <div class="col span-1-of-8" />
+        <div className="col span-1-of-8" />
       </section>
     );
   }

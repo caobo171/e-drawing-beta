@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { setUsersOnline } from '../../actions/userActions';
+import { setUsersOnline } from '../actions/userActions';
 
 class Global extends React.Component {
   state = {
@@ -9,14 +9,12 @@ class Global extends React.Component {
   };
   componentDidMount() {
     if (window.socket) {
-      console.log("long socket ok ok");
       window.socket.on("challenge", (uid) => {
         console.log('cao da nhan duoc challeng')
         this.setState({ ischallenged: true,uid:uid});
       });
 
       window.socket.on("get-users",(data)=>{
-        console.log('long data',data);
         this.props.setUsersOnline(data);
       })
 

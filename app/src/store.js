@@ -1,6 +1,8 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/auth';
+import 'firebase/firestore'
 
 import "firebase/firestore";
 import { firebaseReducer, reactReduxFirebase, getFirebase } from "react-redux-firebase";

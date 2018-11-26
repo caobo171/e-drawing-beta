@@ -5,6 +5,7 @@ export default class AI {
     this.classNames = [];
     this.model = {};
     this.len = 784;
+    //this.classPath = "model2/class_names.txt";
     this.classPath = "model2/class_names.txt";
     this.stringClasses = "";
   }
@@ -16,6 +17,7 @@ export default class AI {
       rawFile.onreadystatechange = function() {
         if (rawFile.readyState === 4) {
           if (rawFile.status === 200 || rawFile.status === 0) {
+            //console.log('cao',rawFile.responseText.split('\n').length)
             resolve(rawFile.responseText);
           }
         }
@@ -33,21 +35,33 @@ export default class AI {
     }
   }
 
-  start = async () => {
-    //arabic or english
-    // mode = cur_mode;
+  start = () => {
+    return new Promise(async (resolve, reject) => {
+      // mode = cur_mode;
 
-    //load the model
-    this.model = await tf.loadModel("model2/model.json");
-    this.readFile().then(data => this.success(data));
-    //this.success(this.stringClasses);
-    console.log(this.model);
+      console.log("cao aaaaaaa");
+      //load the model
+      // this.model = await tf.loadModel("model2/model.json");
+      this.model = await tf.loadModel("model2/model.json");
+      const data = await this.readFile();
+      await this.success(data);
+      //this.success(this.stringClasses);
+    //  console.log("cao", this.model);
+      //warm up
+      let img = this.p.get();
+       img.resize(10,10)
+       img.loadPixels();
+      //console.log('cao',img);
+      img.resize(28, 28);
 
-    //warm up
-    this.model.predict(tf.zeros([1, 28, 28, 1])).print();
-    if (this.model !== undefined && this.model !== null) {
-      return true;
-    } else return false;
+      this.p.loadPixels();
+      console.log('cao',this.p.pixels)
+       await this.model.predict(this.preprocess(img.imageData)).print();
+      
+      if (this.model !== undefined && this.model !== null) {
+        resolve();
+      } else reject();
+    });
   };
   preprocess = imgData => {
     return tf.tidy(() => {
@@ -63,23 +77,35 @@ export default class AI {
 
       //We add a dimension to get a batch shape
       const batched = normalized.expandDims(0);
+      console.log("cao", batched);
 
       return batched;
     });
   };
 
   predict = () => {
-    // let inputs = [];
+     let inputs = [];
     let img = this.p.get();
 
     img.resize(28, 28);
     img.loadPixels();
+    //console.log('cao img',img)
+    for (let i = 0; i < this.len; i++) {
+      let bright = img.pixels[i * 4+1];
+      inputs[i] = bright;
+    }
+    console.log('cao',inputs)
     // const pred = model.predict(preprocess(imgData)).dataSync();
+    //console.log('cao model',this.model)
     const pred = this.model.predict(this.preprocess(img.imageData)).dataSync();
     //console.log(pred);
+    //console.log("cao pred", pred);
+
+
     const indices = this.findIndicesOfMax(pred, 5);
     const probs = this.findTopValues(pred, 5);
     const names = this.getClassNames(indices);
+    //console.log('cao',names)
     return { probs: probs, names: names };
   };
 

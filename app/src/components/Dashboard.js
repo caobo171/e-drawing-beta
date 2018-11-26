@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
         this.props.history.push('/login');
     }
     const { currentUser ,auth} = this.props;
-    console.log('check',currentUser);
+
     return (
       <React.Fragment>
         {(currentUser.name && auth) && (
@@ -60,7 +60,7 @@ class Dashboard extends React.Component {
                     </a>
                   </div>
                   <div className="dashboard__list--icon">
-                    <a className="dashboard__list--icon--a">
+                    <a href="#2" className="dashboard__list--icon--a">
                       <i className="fas fa-edit" />
                       <div className="dashboard__list--caption">notes</div>
                     </a>
@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
               </div>
               <div className="col span-1-of-2">
                 <div className="dashboard__nav">
-                  <a href="#" className="dashboard__card">
+                  <a href="#1" className="dashboard__card">
                     <div className="dashboard__card--icon">
                       <i className="dashboard__card--icon--i fas fa-crown" />
                     </div>

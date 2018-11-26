@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Test from "./components/Test";
 import Login from "./components/auth/Login";
 import Arena from './components/Arena';
-import Global from './components/socket/Global';
+import Global from './components/Global';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profiles';
 import Practice from './components/practice/Practice';

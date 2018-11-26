@@ -77,7 +77,6 @@ class Profile extends Component {
                     <form className="form profile__form">
                       <div className="form__control">
                         <label
-                          for=""
                           className="form__title profile__form__title"
                         >
                           Name
@@ -91,7 +90,6 @@ class Profile extends Component {
                       </div>
                       <div className="form__control">
                         <label
-                          for=""
                           className="form__title profile__form__title"
                         >
                           Email
@@ -105,7 +103,6 @@ class Profile extends Component {
                       </div>
                       <div className="form__control">
                         <label
-                          for=""
                           className="form__title profile__form__title"
                         >
                           Phone Number
