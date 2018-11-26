@@ -12,8 +12,11 @@ class Practice extends Component {
       word: "",
       start: false,
       wordList:[],
-      time: 5,
+      time: 6,
       prediction: [],
+      isEnd: false,
+
+      // Comment true to go back normally
       isNotify: true
     };
     this.handleLevelUp = this.handleLevelUp.bind(this);
@@ -39,12 +42,16 @@ class Practice extends Component {
     console.log("cao cao");
     let prediction = this.state.prediction;
     prediction.push(value);
-    if (prediction.length >= 5) {
+    // cho su li ket thuc
+    //
+    if ( prediction.length >= 5) {
       clearInterval(this.timer);
       this.setState({ isNotify: true });
+      this.setState({isEnd: true})
       setTimeout(() => {
         this.props.history.push("/");
       }, 5000);
+      // cho su li ket thuc
     } else {
       this.setState({ prediction, time: 5, isNotify: true }, () => {
         console.log("cao", this.state.prediction);
@@ -56,6 +63,7 @@ class Practice extends Component {
     this.setState({ start: true }, () => {
       this.timer = setInterval(() => {
         if (this.state.time > 0) {
+          // COmment dong nay de dung
           this.tick();
         } else if (this.state.isNotify) {
           this.setState({ time: 15, isNotify: false });
@@ -103,81 +111,80 @@ class Practice extends Component {
         {this.state.start ? (
           <div>
             {!this.state.isNotify ? (
-              <section className="match">
-                <div className="board" id="sketchPractice">
-                  <div className="board__avatar--right">
-                    <div className="board__avatar--name--right">
-                      {user.name}
+              <section className="practice">
+                <div className="practice__board" id="sketchPractice">
+                        <div className="practice__board--avatar">
+                          <div className="practice__board--avatar--name">
+                            {user.name}
+                          </div>
+                          <img
+                            className="practice__board--avatar--img"
+                            src={user.avatar}
+                            alt="avatar"
+                          />
+                        </div>
+                        <div className="practice__board--dashboard" />
+                        <P5Wrapper
+                          timer={this.state.time}
+                          sketch={sketchPractice}
+                          word={this.state.wordList[this.state.prediction.length]}
+                          handleLevelUp={val => this.handleLevelUp(val)}
+                        />
+                        <canvas
+                          id="canvas1"
+                          width="520%"
+                          height="530%"
+                          className="practice__canvas"
+                          style={{ border: "1px , solid white", position:"absolute" }}
+                        />
+                </div>
+                <div className="practice__dashboard">
+                        <div className="practice__timer">
+                          <div className="practice__timer--status" id="status">
+                            Loading...
+                          </div>
+                          <i className="practice__timer--clock far fa-clock" />
+                          <div className="practice__timer--number">
+                             {this.state.time} s
+                          </div>
+                        </div>
+                        <div className="practice__result">                 
+                          <div className="practice__result--title">
+                             <h2>Result</h2>
+                          </div>
+                          <div className="practice__chart-prediction" id="chart_prediction">
+                            <section className="practice__chart">
+                              <div className="pieID pie" />
+                              <ul className="pieID legend">
+                                <li>
+                                  <em id="sym1" />
+                                  <span id="prob1" />
+                                </li>
+                                <li>
+                                  <em id="sym2" />
+                                  <span id="prob2" />
+                                </li>
+                                <li>
+                                  <em id="sym3" />
+                                  <span id="prob3" />
+                                </li>
+                                <li>
+                                  <em id="sym4" />
+                                  <span id="prob4" />
+                                </li>
+                                <li>
+                                  <em id="sym5" />
+                                  <span id="prob5" />
+                                </li>
+                              </ul>
+                            </section>
+                          </div>
                     </div>
-                    <img
-                      className="board__avatar--img"
-                      src={user.avatar}
-                      alt="avatar"
-                    />
-                  </div>
-                  <div className="board__dashboard" />
-                  <P5Wrapper
-                    timer={this.state.time}
-                    sketch={sketchPractice}
-                    word={this.state.wordList[this.state.prediction.length]}
-                    handleLevelUp={val => this.handleLevelUp(val)}
-                  />
-                  <canvas
-                    id="canvas1"
-                    width="520%"
-                    height="530%"
-                    className="canvas"
-                    style={{ border: "1px , solid white", marginTop: "-78px" }}
-                  />
-                </div>
-                <div className="match__score" id="status">
-                  Loading...
-                </div>
-                <div className="match__timer">
-                  <i className="match__timer--clock far fa-clock" />
-                  <div className="match__timer--number">
-                    + {this.state.time}
-                  </div>
-                </div>
-                <div className="board">
-                  <div className="board__avatar--right">
-                    <div className="board__avatar--name--left">
-                      <h2>
-                        <strong>Result</strong>
-                      </h2>
-                    </div>
-                  </div>
-                  <div className="board__dashboard" id="chart_prediction">
-                    <section style={{ marginTop: "130px", marginLeft: "5rem" }}>
-                      <div className="pieID pie" />
-                      <ul className="pieID legend">
-                        <li>
-                          <em id="sym1" />
-                          <span id="prob1" />
-                        </li>
-                        <li>
-                          <em id="sym2" />
-                          <span id="prob2" />
-                        </li>
-                        <li>
-                          <em id="sym3" />
-                          <span id="prob3" />
-                        </li>
-                        <li>
-                          <em id="sym4" />
-                          <span id="prob4" />
-                        </li>
-                        <li>
-                          <em id="sym5" />
-                          <span id="prob5" />
-                        </li>
-                      </ul>
-                    </section>
-                  </div>
                 </div>
               </section>
             ) : (
               <WordNotify
+                isEnd={this.state.isEnd}
                 time={this.state.time}
                 word={this.state.wordList[this.state.prediction.length]}
               />

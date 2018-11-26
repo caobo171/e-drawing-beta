@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class Arena extends React.Component {
 
@@ -17,6 +18,7 @@ class Arena extends React.Component {
     console.log('long check usersssss', this.props.usersOnline);
     return (
       <section className="arena">
+        <Link to="/" style={{position:"absolute", top:"10px", left:"50px", textDecoration:"none", borderRadius:"10px"}} className="btn">Dashboard</Link>
         <div className="col span-2-of-8">
           <div className="arena__sidebar">
             <div className="arena__sidebar--change-page">
@@ -26,7 +28,7 @@ class Arena extends React.Component {
             </div>
             <img
               className="arena__sidebar--img"
-              src="img/pencil_warrior-2-pts.png"
+              src={require("../img/pencil_warrior-2-pts.png")}
               alt=""
             />
           </div>
@@ -34,12 +36,12 @@ class Arena extends React.Component {
         <div className="col span-5-of-8 arena__place">
 
           {this.props.usersOnline.map(user => (
-
+            
             <div className="card" key={user.uid}>
               <div className="card__avatar">
                 <img
                   className="card__avatar--img"
-                  src="img/person1.png"
+                  src={require("../img/person1.png")}
                   alt="avatar"
                 />
               </div>

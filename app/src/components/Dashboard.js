@@ -32,7 +32,6 @@ class Dashboard extends React.Component {
                       alt="avatar"
                     />
                   </li>
-                  <li className="nav__link">Fanpage</li>
                   <li className="nav__link"
                   onClick={()=>{
                       if(window.confirm('Are you sure ?')){this.props.logOut()}
@@ -45,7 +44,7 @@ class Dashboard extends React.Component {
                 <div className="dashboard__symbol">
                   <img
                     className="dashboard__symbol--img"
-                    src="img/pencil_warrior-4-pts.png"
+                    src={require("../img/pencil_warrior-4-pts.png")}
                     alt=""
                   />
                 </div>
