@@ -15,7 +15,7 @@ class Dashboard extends React.Component {
 
     return (
       <React.Fragment>
-        {(currentUser.name && auth) && (
+        {(currentUser.name && auth) ? (
           <section className="dashboard" id="dashboard">
             <a href="#popup-sidebar-user" className="list--btn">
               <i className="fas fa-bars list--btn--icon" />
@@ -74,14 +74,14 @@ class Dashboard extends React.Component {
               </div>
               <div className="col span-1-of-2">
                 <div className="dashboard__nav">
-                  <a href="#1" className="dashboard__card">
+                  <Link to="/ranking" className="dashboard__card">
                     <div className="dashboard__card--icon">
                       <i className="dashboard__card--icon--i fas fa-crown" />
                     </div>
                     <div className="dashboard__card--title">
                       <h3 className="heading-tertiary">The Rankings</h3>
                     </div>
-                  </a>
+                  </Link>
                   <Link to="/arena" className="dashboard__card">
                     <div className="dashboard__card--icon">
                       <i className="dashboard__card--icon--i fas fa-chess-rook" />
@@ -102,7 +102,7 @@ class Dashboard extends React.Component {
               </div>
             </div>
           </section>
-        )}
+        ):<h1>Loading...</h1>}
       </React.Fragment>
     );
   }

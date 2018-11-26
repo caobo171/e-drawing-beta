@@ -50,6 +50,8 @@ const userReducer = (state = initState, action) => {
 
        return {...state,usersOnline:action.data}
      
+    case "GET_USERS":
+       return {...state, users:action.data}
     default:
       return state;
   }

@@ -2,7 +2,7 @@ import React from "react";
 export default class WordNotify extends React.Component {
   
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     return (
       <React.Fragment>
         {this.props.isEnd ? 

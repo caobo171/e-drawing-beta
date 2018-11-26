@@ -38,6 +38,8 @@ firebase.firestore().settings({
   timestampsInSnapshots: true
 })
 
+window.firestore = firebase.firestore();
+
 firebase.auth().onAuthStateChanged((user) =>{
   if(user){
       //console.log('cao ',user);

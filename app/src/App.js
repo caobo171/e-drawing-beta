@@ -8,6 +8,7 @@ import Global from './components/Global';
 import Dashboard from './components/Dashboard';
 import Profile from './components/Profiles';
 import Practice from './components/practice/Practice';
+import Ranking from './components/Ranking';
 import test from "./components/auth/test";
 
 import { Provider } from "react-redux";
@@ -31,6 +32,7 @@ class App extends Component {
               <Route path="/testplay/:id"exact component={Test}/>
               <Route path = "/profile" exact component = {Profile}/>
               <Route path = "/practice" exact component = {Practice}/>
+              <Route path = "/ranking" exact component = {Ranking}/>
             </div>
             
       

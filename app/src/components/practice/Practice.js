@@ -4,6 +4,7 @@ import P5Wrapper from "react-p5-wrapper";
 import sketchPractice from "../../sketches/sketchPractice";
 import AI from "../../sketches/aiService";
 import WordNotify from "./WordNotify";
+import { upExpByID } from '../../actions/userActions'
 
 class Practice extends Component {
   constructor(props) {
@@ -46,8 +47,11 @@ class Practice extends Component {
     //
     if ( prediction.length >= 5) {
       clearInterval(this.timer);
-      this.setState({ isNotify: true });
-      this.setState({isEnd: true})
+      this.setState({ isNotify: true,isEnd :true },()=>{
+        console.log('cao uid',this.props.user.uid);
+        this.props.upExpByID(this.props.user.uid,50);
+      });
+      //this.setState({isEnd: true})
       setTimeout(() => {
         this.props.history.push("/");
       }, 5000);
@@ -206,7 +210,11 @@ const mapStatetoProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    upExpByID:(userID,expAdd)=>{
+      dispatch(upExpByID(userID,expAdd))
+    }
+  };
 };
 
 export default connect(

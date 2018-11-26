@@ -1,24 +1,34 @@
-export const logIn = () => {
+export const logIn = (facebook=false) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
+    console.log('cao aaaaa');
     const firebase = getFirebase();
     const firestore = getFirestore();
-    var provider = new firebase.auth.GoogleAuthProvider();
+    let provider
+    // if(!facebook){
+    //  provider = new firebase.auth.GoogleAuthProvider();
+    // }else{
+      console.log('cao aaaaa');
+      provider = new firebase.auth.FacebookAuthProvider();
+    //}
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
+        console.log(result);
         firestore
           .collection("users")
           .doc(result.user.uid)
           .get()
           .then(res => {
+            
             if (!res.data()) {
               const userData = {
                 name: result.user.displayName,
                 avatar: result.user.photoURL,
                 exp: 0,
                 level: 0,
-                certification: []
+                certification: [],
+                uid:result.user.uid
               };
               firestore
                 .collection("users")
@@ -44,6 +54,7 @@ export const logIn = () => {
           });
       })
       .catch(error => {
+        console.log(error);
         dispatch({ type: "GET_CURRENT_USER_SUCCESS", data: null });
       });
   };
@@ -77,3 +88,4 @@ export const getCurrentUser = (firestore, dataUser, dispatch) => {
       dispatch({ type: "GET_CURRENT_USER_SUCCESS", data: null });
     });
 };
+
