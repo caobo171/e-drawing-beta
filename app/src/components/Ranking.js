@@ -29,6 +29,7 @@ class Ranking extends Component {
     console.log("cao users", users);
     return (
       <section className="ranking">
+        <Link to="/" style={{position:"absolute", top:"10px", left:"50px", textDecoration:"none", borderRadius:"10px"}} className="btn">Dashboard</Link>
         <div className="row">
           <div className="col span-1-of-8" />
           <div className=" col span-4-of-8">
@@ -45,7 +46,7 @@ class Ranking extends Component {
                   <i className="fas fa-award table__title--icon" />
                 </li>
                 {/* ----------------- List Item ------------------- */}
-                <React.Fragment>
+               
                   {usersShow.map(user => (
                     <li className="table__item" key={user.uid}>
                       <h4 className="table__item--rank" />
@@ -64,7 +65,7 @@ class Ranking extends Component {
                       <div className="table__item--award">Newbie</div>
                     </li>
                   ))}
-                </React.Fragment>
+            
                 {/* ---------------------  List Item End ---------------------*/}
               </ul>
               <div className="table--change-page">
@@ -97,7 +98,7 @@ class Ranking extends Component {
               </h1>
             </div>
             <img
-              src="img/pencil_warrior-3-pts.png"
+              src={require("../img/pencil_warrior-3-pts.png")}
               alt=""
               className="ranking__picture"
             />
