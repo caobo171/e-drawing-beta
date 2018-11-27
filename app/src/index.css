@@ -1449,6 +1449,7 @@ body {
   width: 3.5rem;
   height: 3.5rem;
   margin-right: 1rem;
+  border-radius: 50%;
 }
 .table__item__link--name {
   font-size: 1.5rem;
@@ -1472,6 +1473,11 @@ body {
   align-items: center;
   margin-top: 3rem;
   color: #f53240;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2rem;
+
 }
 .table--change-page--icon {
   font-size: 3rem;
@@ -1829,6 +1835,7 @@ body {
   border-radius: 2rem;
   box-shadow: 0.1rem 0.2rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
   background-color: #f7f7f7;
+  position: relative;
 }
 .ranking__dashboard--title {
   font-size: 7rem;
