@@ -193,8 +193,8 @@ class TestBeta extends Component {
     return (
       <div>
         <section className="practice">
-          <div className="practice__board" id="sketchPractice">
-            <div className="practice__board--avatar">
+          <div className="practice__board match__board--left" id="sketchPractice">
+            <div className="practice__board--avatar match--avatar">
               <div className="practice__board--avatar--name">{user.name}</div>
               <img
                 className="practice__board--avatar--img"
@@ -216,7 +216,7 @@ class TestBeta extends Component {
               id="canvas2"
               width="520%"
               height="530%"
-              className="practice__canvas"
+              className="practice__canvas match__canvas"
               style={{ border: "1px , solid white", position: "absolute" }}
             />
           </div>
@@ -247,15 +247,15 @@ class TestBeta extends Component {
             </ul>
           </div>
           <div className="match__timer">
-          <h3>-{this.state.time}-</h3>
-          <h3>{this.state.myScore}:{this.state.yourScore}</h3>
+          <h3>{this.state.time}s</h3>
+          <h3>{this.state.myScore} : {this.state.yourScore}</h3>
           </div>
-          <div className="practice__board" id="sketchPractice">
-            <div className="practice__board--avatar">
-              <div className="practice__board--avatar--name">{user.name}</div>
+          <div className="practice__board match__board--right" id="sketchPractice">
+            <div className="practice__board--avatar match--avatar">
+              <div className="practice__board--avatar--name">Opponent</div>
               <img
                 className="practice__board--avatar--img"
-                src={user.avatar}
+                src={require("../img/person2.png")}
                 alt="avatar"
               />
             </div>
@@ -271,7 +271,7 @@ class TestBeta extends Component {
               id="canvas3"
               width="520%"
               height="530%"
-              className="practice__canvas"
+              className="practice__canvas match__canvas"
               style={{ border: "1px , solid white", position: "absolute" }}
             />
           </div>

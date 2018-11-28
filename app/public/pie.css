@@ -9,6 +9,7 @@
 .pieID {
   display: inline-block;
   vertical-align: top;
+  border-radius: .5rem;
 }
 .pie {
   height: 200px;
