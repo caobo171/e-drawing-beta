@@ -57,7 +57,7 @@ class Profile extends Component {
                         <div className="profile__character--achievement--item">
                           <i className="far fa-chart-bar profile__character--achievement--icon" />
                           <p className="profile__character--achievement--number">
-                            {(user.match && user.match>0)?(Number(user.win/user.match)*100):0}
+                            {(user.match && user.match>0 &&user.win)?(Number(user.win/user.match)*100):0}
                             <span className="profile__character--achievement--quote">
                               %
                             </span>
