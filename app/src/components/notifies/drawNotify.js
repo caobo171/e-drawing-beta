@@ -18,7 +18,8 @@ export default class DrawNotify extends React.Component {
               if (this.state.exp >= this.props.exp) {
                 clearInterval(timer);
                 setTimeout(() => {
-                  this.props.history.push("/arena");
+                  //this.props.history.push("/arena");
+                  window.location = window.location.origin
                 }, 2000);
               }
             }

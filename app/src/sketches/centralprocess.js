@@ -102,7 +102,11 @@ export default class Central {
   async loadModel() {
     this.model = await tf.loadModel("model_2/model.json");
     //warm up
+    try{
     this.model.predict(tf.zeros([1, 28, 28, 1]));
+    }catch(err){
+      console.log(err);
+    }
     console.log("cao loaded model");
     this.allowDrawing();
     await this.readFile().then(data => this.successClassNames(data));
@@ -143,7 +147,6 @@ export default class Central {
    *   PREDICT
    * */
   predict() {
-    console.log("cao", this.coords);
 
     if (this.coords.length >= 2) {
       //get the minimum bounding box

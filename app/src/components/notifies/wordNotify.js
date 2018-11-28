@@ -11,7 +11,7 @@ import React,{Component} from 'react';
                             Draw {this.props.level}/5 Words 
                         </p>
                         <h1 className="heading-primary notification-word__content--word">
-                            {this.props.word} 
+                         {this.props.word?this.props.word.replace('_'," "):''}
                         </h1>
                         <p className="notification-word__content--warning">
                             Under 15s and continue in 

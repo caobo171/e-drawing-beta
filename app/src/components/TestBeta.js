@@ -39,7 +39,7 @@ class TestBeta extends Component {
     while (n--) {
       let x = Math.floor(Math.random() * (len - 1));
       result[n] = x in taken ? taken[x] : x;
-      taken[x] = --len in taken ? taken(len) : len;
+      taken[x] = --len in taken ? taken[len] : len;
     }
     return result;
   };
@@ -127,7 +127,9 @@ class TestBeta extends Component {
     }, 1000);
   };
 
-  componentWillMount() {
+  // componentWillMount() {}
+
+  componentDidMount() {
     window.socket.on("server-set-owner", async isOwner => {
       await this.renderWords();
       console.log("long", this.state.words);
@@ -176,9 +178,6 @@ class TestBeta extends Component {
         }
       }
     });
-  }
-
-  componentDidMount() {
     window.socket.on("server-level-up", () => {
       console.log("long level up");
       if (this.state.level <= 5) {
@@ -231,8 +230,10 @@ class TestBeta extends Component {
     return (
       <div>
         <section className="practice">
-          <div className="practice__board match__board--left" id="sketchPractice">
-           
+          <div
+            className="practice__board match__board--left"
+            id="sketchPractice"
+          >
             <div className="practice__board--avatar match--avatar">
               <div className="practice__board--avatar--name">{user.name}</div>
               <img
@@ -286,11 +287,18 @@ class TestBeta extends Component {
             </ul>
           </div>
           <div className="match__timer">
-          <h3>{this.state.time}s</h3>
-          <button className="match__clear--btn" id="reset">CLEAR</button>
-          <h3>{this.state.myScore} : {this.state.yourScore}</h3>
+            <h3>{this.state.time}s</h3>
+            <button className="match__clear--btn" id="reset">
+              CLEAR
+            </button>
+            <h3>
+              {this.state.myScore} : {this.state.yourScore}
+            </h3>
           </div>
-          <div className="practice__board match__board--right" id="sketchPractice">
+          <div
+            className="practice__board match__board--right"
+            id="sketchPractice"
+          >
             <div className="practice__board--avatar match--avatar">
               <div className="practice__board--avatar--name">Opponent</div>
               <img
