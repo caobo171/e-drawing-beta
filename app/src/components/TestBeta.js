@@ -287,7 +287,7 @@ class TestBeta extends Component {
           </div>
           <div className="match__timer">
           <h3>{this.state.time}s</h3>
-          <button className="match__clear--btn">CLEAR</button>
+          <button className="match__clear--btn" id="reset">CLEAR</button>
           <h3>{this.state.myScore} : {this.state.yourScore}</h3>
           </div>
           <div className="practice__board match__board--right" id="sketchPractice">
