@@ -7,7 +7,7 @@ const initState = {
   usersOnline:[],
   auth:true
 };
-const socket = io("http://localhost:5000");
+const socket = io("https://edrawingfight.herokuapp.com");
 
 
 
