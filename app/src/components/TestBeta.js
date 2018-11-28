@@ -194,6 +194,7 @@ class TestBeta extends Component {
       <div>
         <section className="practice">
           <div className="practice__board match__board--left" id="sketchPractice">
+           
             <div className="practice__board--avatar match--avatar">
               <div className="practice__board--avatar--name">{user.name}</div>
               <img
@@ -248,6 +249,7 @@ class TestBeta extends Component {
           </div>
           <div className="match__timer">
           <h3>{this.state.time}s</h3>
+          <button className="match__clear--btn">CLEAR</button>
           <h3>{this.state.myScore} : {this.state.yourScore}</h3>
           </div>
           <div className="practice__board match__board--right" id="sketchPractice">
