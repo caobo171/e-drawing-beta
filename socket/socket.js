@@ -32,10 +32,12 @@ module.exports = function (io){
         })
 
         socket.on('logout-user',(data)=>{
+            io.sockets.emit('get-users',userOnline);
             handleDisConnect(data.socketid);
         })
 
         socket.on('disconnect',()=>{
+            io.sockets.emit('get-users',userOnline);
             handleDisConnect(socket.id);
         })
         

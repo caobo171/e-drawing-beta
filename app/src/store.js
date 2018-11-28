@@ -1,6 +1,8 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/auth';
+import 'firebase/firestore'
 
 import "firebase/firestore";
 import { firebaseReducer, reactReduxFirebase, getFirebase } from "react-redux-firebase";
@@ -14,7 +16,6 @@ import {
 import {getCurrentUser} from './actions/authActions';
 
 // Reducers
-import testReducer from './reducers/testReducer';
 import userReducer from './reducers/userReducer';
 
 const firebaseConfig = {
@@ -36,6 +37,8 @@ firebase.firestore().settings({
   timestampsInSnapshots: true
 })
 
+window.firestore = firebase.firestore();
+
 firebase.auth().onAuthStateChanged((user) =>{
   if(user){
       //console.log('cao ',user);
@@ -56,7 +59,6 @@ const createStoreWithFirebase = compose(
 const rootReducer = combineReducers({
   firebase: firebaseReducer,
   firestore: firestoreReducer,
-  test: testReducer,
   user: userReducer
 });
 

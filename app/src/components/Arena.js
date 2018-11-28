@@ -1,57 +1,84 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Arena extends React.Component {
-
-
-  handleClick = (user)=>{
-    console.log('long ấy user',user);
-    if(this.props.socket){
-      this.props.socket.emit("challenge",user.uid,user.socketid)
+  handleClick = user => {
+    console.log("long ấy user", user);
+    window.user = this.props.currentUser;
+    const {currentUser} = this.props;
+    if (this.props.currentUser) {
+      window.socket.emit("challenge",user.uid,
+      user:{avatar:currentUser.avatar,name:currentUser.name}
+       ,user.socketid);
     }
-  }
+  };
   render() {
-    if(!this.props.auth){
-      this.props.history.push('/');
+    if (!this.props.auth) {
+      this.props.history.push("/");
     }
-    console.log('long check usersssss', this.props.usersOnline);
+    console.log("long check usersssss", this.props.usersOnline);
     return (
-      <section class="arena">
-        <div class="col span-2-of-8">
-          <div class="arena__sidebar">
-            <div class="arena__sidebar--change-page">
-              <i class="fas fa-angle-double-left arena__sidebar--change-page--icon" />
+      <section className="arena">
+        <Link
+          to="/"
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "50px",
+            textDecoration: "none",
+            borderRadius: "10px"
+          }}
+          className="btn"
+        >
+          Dashboard
+        </Link>
+        <div className="col span-2-of-8">
+          <div className="arena__sidebar">
+            <div className="arena__sidebar--change-page">
+              <i className="fas fa-angle-double-left arena__sidebar--change-page--icon" />
               Page
-              <i class="fas fa-angle-double-right arena__sidebar--change-page--icon" />
+              <i className="fas fa-angle-double-right arena__sidebar--change-page--icon" />
             </div>
             <img
-              class="arena__sidebar--img"
-              src="img/pencil_warrior-2-pts.png"
+              className="arena__sidebar--img"
+              src={require("../img/pencil_warrior-2-pts.png")}
               alt=""
             />
           </div>
         </div>
-        <div class="col span-5-of-8 arena__place">
-
+        <div className="col span-5-of-8 arena__place">
           {this.props.usersOnline.map(user => (
-
-            <div class="card">
-              <div class="card__avatar">
-                <img
-                  class="card__avatar--img"
-                  src="img/person1.png"
-                  alt="avatar"
-                />
-              </div>
-              <div class="card__name">Vipmath171</div>
-              <div class="card__btn btn">
-                <div class="card__btn--icon" onClick={()=>this.handleClick(user)}>Challenge</div>
-              </div>
-            </div>
-
+            <React.Fragment  key={user.uid}>
+              {user.uid !== this.props.currentUser.uid && (
+                <div className="card">
+                  <div
+                    className="card__avatar"
+                    onClick={() => {
+                      this.props.history.push(`/profile/${user.uid}`);
+                    }}
+                  >
+                    <img
+                      className="card__avatar--img"
+                      src={user.avatar}
+                      alt="avatar"
+                    />
+                  </div>
+                  <div className="card__name">{user.name}</div>
+                  <div className="card__btn btn">
+                    <div
+                      className="card__btn--icon"
+                      onClick={() => this.handleClick(user)}
+                    >
+                      Challenge
+                    </div>
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
         </div>
-        <div class="col span-1-of-8" />
+        <div className="col span-1-of-8" />
       </section>
     );
   }
@@ -60,19 +87,16 @@ class Arena extends React.Component {
 const mapStatetoProps = state => {
   return {
     usersOnline: state.user.usersOnline,
-    socket : state.user.currentUser.socket,
-    auth : state.user.auth
+    currentUser: state.user.currentUser,
+    auth: state.user.auth
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {
-
-  };
+  return {};
 };
 
 export default connect(
   mapStatetoProps,
   mapDispatchToProps
 )(Arena);
-

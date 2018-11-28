@@ -8,9 +8,7 @@ const initState = {
   auth:true
 };
 const socket = io("http://localhost:5000");
-socket.on("user-exist", () => {
-  console.log("check USER EXIST");
-});
+
 
 
 
@@ -25,12 +23,12 @@ const userReducer = (state = initState, action) => {
 
     case "GET_CURRENT_USER_SUCCESS":
       let object1 = { socket, ...action.data };
-      console.log("check getcurrent success",action.data);
+  
       if(action.data){
-        console.log('cao get current user',action.data)
+  
         object1.socket.emit("login-user", {
           socketid: object1.socket.id,
-          uid: action.data.uid
+          ...action.data
         });
         return {...state,currentUser:object1,auth:true}
       }else{
@@ -40,9 +38,11 @@ const userReducer = (state = initState, action) => {
        return {...state,user:action.data}
 
     case "SET_USERS_ONLINE":
-       console.log('long users online',action.data)
+
        return {...state,usersOnline:action.data}
      
+    case "GET_USERS":
+       return {...state, users:action.data}
     default:
       return state;
   }

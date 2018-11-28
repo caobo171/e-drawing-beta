@@ -14,7 +14,11 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \" npm run client\"",
-    "start": "node index.js"
+    "start": "node index.js",
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix app && npm run build --prefix app"
+  },
+  "engines":{
+    "node":"8.11.3"
   },
   "repository": {
     "type": "git",

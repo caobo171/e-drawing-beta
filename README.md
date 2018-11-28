@@ -1,2 +1,2 @@
-# e-drawing-fight
-An web app for learning English by drawing
+# e-drawing-beta
+a clone project of e-drawing 

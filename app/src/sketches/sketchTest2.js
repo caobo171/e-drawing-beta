@@ -1,37 +1,48 @@
-import AI from "./aiService";
+
+import Central from './centralprocess';
+
 export default function sketchTest2(p) {
-  var ai;
-  var x; var px;
-  var y; var py;
-  var socket = null;
+  var x;
+  var px;
+  var y;
+  var py;
+  var centralProcess ;
+  var time = 15;
+  p.myCustomRedrawAccordingToNewPropsHandler = function(props) {
+    time = props.time
+   
+  };
   p.setup = () => {
-    ai = new AI(p);
-    ai.start();
-    var canvasDiv = document.getElementById('sketch1');
-    var width = canvasDiv.offsetWidth;
-    var height = canvasDiv.offsetHeight;
-    p.createCanvas(width,height);
-    p.background("#ddd");
+
+    centralProcess = new Central('canvas3',null,"#ddd");
+    window.socket.on(
+      "server-send-drawing",
+      (mousex, mousey, pmousex, pmousey) => {
+        if (true) {
+          try {
+            px = x;
+            py = y;
+            x = mousex;
+            y = mousey;
+            p.stroke(0);
+            //console.log('cao',x,y);
+            centralProcess.drawCanvas(x,y,px,py);
+            
+          } catch (e) {}
+        }
+      }
+    );
+
+    window.socket.on("server-level-up", () => {
+      centralProcess.erase();
+    });
   };
 
-  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    socket = props.socket;
-    if(socket){
-      window.socket.on("server-send-drawing",(mousex,mousey,pmousex,pmousey)=>{ 
-        if(true){
-          px=pmousex;py=pmousey;
-          x=mousex;y=mousey;
-          p.stroke(0);
-          p.line(px,py,x,y);
-        }
-      })
 
-      window.socket.on("server-level-up",()=>{
-        p.background('#ddd');
-      })
-    }
-  }
 
   p.draw = () => {
-  }
+    if(time===0){
+      centralProcess.erase();
+    };
+  };
 }

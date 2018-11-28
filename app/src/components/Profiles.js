@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getUserByID } from "../actions/userActions";
 import { connect } from "react-redux";
+import { levelProcess ,expLeft} from './../sketches/levelprocess';
 class Profile extends Component {
   componentDidMount() {
     console.log("long param", this.props.match.params.id);
@@ -29,7 +30,7 @@ class Profile extends Component {
                         <div className="profile__character--achievement--item">
                           <i className="fas fa-coins profile__character--achievement--icon" />
                           <p className="profile__character--achievement--number">
-                            500
+                            {user.exp}
                           </p>
                         </div>
                         <div className="profile__character--achievement--item">
@@ -41,7 +42,7 @@ class Profile extends Component {
                         <div className="profile__character--achievement--item">
                           <i className="fas fa-star profile__character--achievement--icon" />
                           <p className="profile__character--achievement--number">
-                            10
+                            {user.star?user.star:0}
                           </p>
                         </div>
                         <div className="profile__character--achievement--item">
@@ -56,7 +57,7 @@ class Profile extends Component {
                         <div className="profile__character--achievement--item">
                           <i className="far fa-chart-bar profile__character--achievement--icon" />
                           <p className="profile__character--achievement--number">
-                            30{" "}
+                            {(user.match && user.match>0)?(Number(user.win/user.match)*100):0}
                             <span className="profile__character--achievement--quote">
                               %
                             </span>
@@ -77,7 +78,6 @@ class Profile extends Component {
                     <form className="form profile__form">
                       <div className="form__control">
                         <label
-                          for=""
                           className="form__title profile__form__title"
                         >
                           Name
@@ -91,31 +91,29 @@ class Profile extends Component {
                       </div>
                       <div className="form__control">
                         <label
-                          for=""
                           className="form__title profile__form__title"
                         >
-                          Email
+                          Level 
                         </label>
                         <input
                           type="text"
                           className="form__input"
-                          value="vipmath171@gmail.com"
+                          value={levelProcess(user.exp)}
                           disabled
                         />
                       </div>
                       <div className="form__control">
                         <label
-                          for=""
                           className="form__title profile__form__title"
                         >
-                          Phone Number
+                          Have {user.exp}/{expLeft(user.exp)} to gain next level
                         </label>
-                        <input
+                        {/* <input
                           type="text"
                           className="form__input"
                           value="09629202"
                           disabled
-                        />
+                        /> */}
                       </div>{" "}
                       <input
                         onClick={()=>{this.props.history.push('/')}}

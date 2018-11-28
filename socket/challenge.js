@@ -1,8 +1,8 @@
 module.exports=(io,socket ,userOnline)=>{
-    socket.on('challenge',(uid,socketid)=>{    //uid va socketid cua nguoi 2
+    socket.on('challenge',(uid,user,socketid)=>{    //uid va socketid cua nguoi 2
         console.log('onchallenge');
         socket.join(uid);
-        socket.to(socketid).emit('challenge',uid);
+        socket.to(socketid).emit('challenge',uid,user);
     })
     socket.on("client-accept",(uid)=>{
         socket.join(uid);
