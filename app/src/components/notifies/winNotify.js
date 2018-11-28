@@ -23,7 +23,7 @@ export default class WinNotify extends React.Component {
               }
             }
           );
-        }, 30);
+        }, 10);
       }, 1000);
   }
   render() {

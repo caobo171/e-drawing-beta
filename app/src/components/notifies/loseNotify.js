@@ -23,7 +23,7 @@ export default class LoseNotify extends React.Component {
             }
           }
         );
-      }, 30);
+      }, 20);
     }, 1000);
   }
   render() {
