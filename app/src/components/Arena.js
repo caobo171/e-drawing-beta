@@ -46,6 +46,9 @@ class Arena extends React.Component {
               Page
               <i className="fas fa-angle-double-right arena__sidebar--change-page--icon" />
             </div>
+            <div className="arena__sidebar--avatar">
+                <img className="arena__sidebar--avatar--img" src={this.props.currentUser.avatar}></img>
+            </div>
             <img
               className="arena__sidebar--img"
               src={require("../img/pencil_warrior-2-pts.png")}

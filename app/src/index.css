@@ -1737,6 +1737,20 @@ body {
   justify-content: flex-end;
   flex-wrap: wrap;
 }
+.arena__sidebar{
+  position: relative;
+}
+.arena__side--avatar{
+
+}
+.arena__sidebar--avatar--img{
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 25rem;
+  left: 13rem;
+}
 .arena__sidebar--change-page {
   display: flex;
   justify-content: center;
