@@ -29,10 +29,10 @@ export default class LoseNotify extends React.Component {
   render() {
     return (
       <div className="popup-toward notification">
-        <div className="notification-win popup-toward__content">
-          <i className="fas fa-thumbs-up notification-win__icon" />
-          <h1 className="notification-win__heading heading-primary">
-            Lose<span className="notification-win__heading--quote">!</span>
+        <div className="notification-lose popup-toward__content">
+          <i className="fas fa-frown notification-lose__icon" />
+          <h1 className="notification-lose__heading heading-primary">
+            Lose<span className="notification-lose__heading--quote">!</span>
           </h1>
           <div className="notification__content">
             <div className="notification__content--item">
