@@ -23,6 +23,7 @@ class Global extends React.Component {
       });
 
       window.socket.on("get-users", data => {
+        console.log('bagjlagjlag');
         this.props.setUsersOnline(data);
       });
 

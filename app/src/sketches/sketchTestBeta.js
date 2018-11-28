@@ -1,12 +1,13 @@
-
 import Central from "./centralprocess";
 import createPie from "./pie";
+import Speech from "./speechService";
 export default function sketchTest(p) {
   var word = "";
   var time = 15;
   var socket = null;
   var levelUp = null;
   var roomId;
+  var speech = new Speech();
 
   var centralProcess;
 
@@ -29,24 +30,21 @@ export default function sketchTest(p) {
     createPie(".pieID.legend", ".pieID.pie");
   }
 
-  let sendMouse = (pointer) => {
-   
-      socket.emit(
-        "client-send-drawing",
-        pointer.x,
-        pointer.y,
-        pointer.x+1,
-        pointer.y+1,
-        roomId
-      );
-
+  let sendMouse = pointer => {
+    socket.emit(
+      "client-send-drawing",
+      pointer.x,
+      pointer.y,
+      pointer.x + 1,
+      pointer.y + 1,
+      roomId
+    );
   };
   p.setup = () => {
     centralProcess = new Central("canvas2", "status");
 
     centralProcess.mouseDrag = () => {
-  
-      console.log('cao coor',centralProcess.pointer);
+      // console.log('cao coor',centralProcess.pointer);
 
       sendMouse(centralProcess.pointer);
     };
@@ -56,21 +54,19 @@ export default function sketchTest(p) {
         const { probs, symbols } = centralProcess.predict();
         //console.log("cao", centralProcess.symbols);
         console.log("cao", symbols);
-           console.log("cao word", word);
+        console.log("cao word", word);
         const predictWord = symbols[0].replace(/\s/g, "");
         setTable(symbols, probs);
-           
+
         if (predictWord === word.replace(/\s/g, "")) {
           centralProcess.erase();
-          setTimeout(() => {
-            p.background("white");
-            console.log("long sketch level up");
-            levelUp();
-          }, 1000);
+          speech.speak("GREAT",true);
+          levelUp();
           //   speech.speak(`oh great! It is ${word.replace("_", " ")}`);
           //   handleLevelUp(true);
         } else {
           //speech.speak(`it's not ${predictWord.replace("_", " ")}`);
+          speech.speak(`it's not ${word.replace("_", " ")}`);
         }
       } catch (err) {
         console.log(err);
@@ -78,9 +74,9 @@ export default function sketchTest(p) {
     };
   };
 
-    p.draw = () => {
-      if(time===0){
-        centralProcess.erase();
-      };
-    };
+  p.draw = () => {
+    if (time === 0) {
+      centralProcess.erase();
+    }
+  };
 }

@@ -2,6 +2,7 @@ module.exports = function(io) {
   var userOnline = [];
   handleDisConnect = socketid => {
     userOnline = userOnline.filter(e => {
+      console.log(e.socketid==socketid)
       return e.socketid != socketid;
     });
     //console.log(userOnline);
@@ -41,13 +42,17 @@ module.exports = function(io) {
     });
 
     socket.on("logout-user", data => {
-      io.sockets.emit("get-users", userOnline);
-      handleDisConnect(data.socketid);
+       handleDisConnect(data.socketid);
+       console.log('logout',userOnline);
+       io.sockets.emit("get-users", userOnline);
+    
     });
 
     socket.on("disconnect", () => {
+        handleDisConnect(socket.id);
+        console.log('disconnect',userOnline);
       io.sockets.emit("get-users", userOnline);
-      handleDisConnect(socket.id);
+     
     });
   });
 };

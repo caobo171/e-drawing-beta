@@ -25,7 +25,7 @@ export const upExpByID = (userID, expAdd,starAdd) => {
     const docRef = firestore.collection("users").doc(userID);
     docRef.get().then(res=>{
       const exp = res.data().exp+expAdd;
-      const star= res.data().star? res.data().star:0;
+      const star= res.data().star ? res.data().star:0;
       docRef.update({exp,star:star+starAdd})
     })
   };

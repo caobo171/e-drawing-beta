@@ -8,7 +8,7 @@ import WinNotify from "./notifies/winNotify";
 import LoseNotify from "./notifies/loseNotify";
 import DrawNotify from "./notifies/drawNotify";
 import Central from "../sketches/centralprocess";
-import { upExpByID,upDateWinGameByID } from "./../actions/userActions";
+import { upExpByID, upDateWinGameByID } from "./../actions/userActions";
 
 class TestBeta extends Component {
   constructor(props) {
@@ -16,10 +16,11 @@ class TestBeta extends Component {
 
     const urlParams = new URLSearchParams(window.location.search);
     this.roomid = urlParams.get("roomid");
-    this.levelUp = this.handlerLevelUp.bind(this);
+    this.levelUp = this.leveUp.bind(this);
     this.renderWords = this.renderWords.bind(this);
     //this.handleAfter5s  = this.handleAfter5s.bind(this);
     this.renderNotify = this.renderNotify.bind(this);
+    this.timer = null;
     this.state = {
       isOwner: null,
       myScore: 0,
@@ -28,7 +29,7 @@ class TestBeta extends Component {
       time: 20,
       level: 1,
       render: 1,
-      exp:0
+      exp: 0
     };
   }
 
@@ -60,54 +61,60 @@ class TestBeta extends Component {
 
   handleTimeOut = () => {
     if (this.state.level <= 5) {
-      this.setState({ level: this.state.level + 1, time: 20, render: 1 },()=>{
-        this.checkEndGame()
-      });
+      this.setState(
+        { level: this.state.level + 1, time: 20, render: 1 },
+        () => {
+          this.checkEndGame();
+        }
+      );
     }
   };
 
   checkEndGame = () => {
     if (this.state.level > 5) {
       console.log("End game! ");
-      
+      clearInterval(this.timer);
+
       if (this.state.myScore > this.state.yourScore) {
-        this.setState({ render: 2,exp: 700 });
-        this.props.upExpByID(this.props.user.uid,700)
-        this.props.upDateWinGameByID(this.props.user.uid,1)
+        this.setState({ render: 2, exp: 700 });
+        this.props.upExpByID(this.props.user.uid, 700);
+        this.props.upDateWinGameByID(this.props.user.uid, 1);
       } else if (this.state.myScore === this.state.yourScore) {
-        this.setState({ render: 3,exp:50 });
-        this.props.upExpByID(this.props.user.uid,50)
-        this.props.upDateWinGameByID(this.props.user.uid,0)
+        this.setState({ render: 3, exp: 50 });
+        this.props.upExpByID(this.props.user.uid, 50);
+        this.props.upDateWinGameByID(this.props.user.uid, 0);
       } else {
-        this.setState({ render: 4,exp:-200 });
-        this.props.upExpByID(this.props.user.uid,-200)
-        this.props.upDateWinGameByID(this.props.user.uid,-1)
+        this.setState({ render: 4, exp: -200 });
+        this.props.upExpByID(this.props.user.uid, -200);
+        this.props.upDateWinGameByID(this.props.user.uid, -1);
       }
       console.log("long", this.state.render);
-     
     }
   };
 
-  handlerLevelUp = () => {
+  leveUp = () => {
     console.log("long trying", this.state.level);
     window.socket.emit("client-level-up", this.roomid);
     if (this.state.level <= 5) {
-      this.setState({ level: this.state.level + 1, time: 20, render: 1 });
-      this.setState(state => ({ myScore: state.myScore + 1 }));
+      this.setState(
+        state => ({
+          myScore: state.myScore + 1,
+          level: state.level + 1,
+          time: 20,
+          render: 1
+        }),
+        () => this.checkEndGame()
+      );
     }
-    this.checkEndGame();
   };
 
   tick = () => {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       // dem thoi gian de doi chu moi voi ca xoa canvas
       if (this.state.time > 0) {
-        this.setState({ time: this.state.time - 1 }, () =>
-          console.log(this.state.time)
-        );
+        this.setState({ time: this.state.time - 1 });
       } else {
         this.handleTimeOut();
-        console.log("long tick one");
       }
       if (this.state.time === 15) {
         this.setState({ render: 0 });
@@ -137,10 +144,20 @@ class TestBeta extends Component {
     window.socket.on("server-level-up", () => {
       console.log("long level up");
       if (this.state.level <= 5) {
-        this.setState({ level: this.state.level + 1, time: 20, render: 1 });
-        this.setState(state => ({ yourScore: state.yourScore + 1 }));
+        this.setState(
+          state => {
+            return {
+              yourScore: state.yourScore + 1,
+              level: state.level + 1,
+              time: 20,
+              render: 1
+            };
+          },
+          () => {
+            this.checkEndGame();
+          }
+        );
       }
-      this.checkEndGame();
     });
   }
 
@@ -159,17 +176,11 @@ class TestBeta extends Component {
           />
         );
       case 2:
-        return <WinNotify 
-          exp={this.state.exp}
-          history = {this.props.history}/>;
+        return <WinNotify exp={this.state.exp} history={this.props.history} />;
       case 3:
-        return <DrawNotify 
-          exp={this.state.exp}
-          history= {this.props.history}/>;
+        return <DrawNotify exp={this.state.exp} history={this.props.history} />;
       case 4:
-        return <LoseNotify 
-        exp={this.state.exp}
-        history= {this.props.history}/>;
+        return <LoseNotify exp={this.state.exp} history={this.props.history} />;
       default:
         return null;
     }
@@ -235,7 +246,10 @@ class TestBeta extends Component {
               </li>
             </ul>
           </div>
-          <div className="match__timer">{this.state.time}</div>
+          <div className="match__timer">
+          <h3>-{this.state.time}-</h3>
+          <h3>{this.state.myScore}:{this.state.yourScore}</h3>
+          </div>
           <div className="practice__board" id="sketchPractice">
             <div className="practice__board--avatar">
               <div className="practice__board--avatar--name">{user.name}</div>
@@ -249,7 +263,7 @@ class TestBeta extends Component {
               <P5Wrapper
                 socket={this.props.user.socket}
                 roomId={this.roomid}
-                time= {this.state.time}
+                time={this.state.time}
                 sketch={sketchTest2}
               />
             </div>
@@ -282,10 +296,9 @@ const mapDispatchToProps = dispatch => {
     upExpByID: (userID, expAdd) => {
       dispatch(upExpByID(userID, expAdd));
     },
-    upDateWinGameByID:(userID,win)=>{
-      dispatch(upDateWinGameByID(userID,win))
+    upDateWinGameByID: (userID, win) => {
+      dispatch(upDateWinGameByID(userID, win));
     }
-
   };
 };
 export default connect(

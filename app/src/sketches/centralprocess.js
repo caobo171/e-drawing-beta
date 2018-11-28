@@ -79,7 +79,7 @@ export default class Central {
     var circle2 = new fabric.Circle({
       radius:8 , fill:'orange',left:(x+px)/2,top:(y+py)/2
     })
-    console.log('cao',x,y);
+    //console.log('cao',x,y);
     this.canvas.add(circle,circle2);
   }
 

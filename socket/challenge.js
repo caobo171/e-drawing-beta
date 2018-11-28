@@ -1,6 +1,6 @@
 module.exports=(io,socket ,userOnline)=>{
     socket.on('challenge',(uid,user,socketid)=>{    //uid va socketid cua nguoi 2
-        console.log('onchallenge');
+        console.log('onchallenge',user);
         socket.join(uid);
         socket.to(socketid).emit('challenge',uid,user);
     })

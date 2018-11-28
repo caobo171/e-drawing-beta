@@ -3,13 +3,19 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class Arena extends React.Component {
+  componentDidMount(){
+    
+  }
   handleClick = user => {
-    console.log("long ấy user", user);
-    window.user = this.props.currentUser;
+    
+    // window.user = this.props.currentUser;
     const {currentUser} = this.props;
+    const userEmit = {avatar:currentUser.avatar,name:currentUser.name};
+    console.log("long ấy user", user,userEmit);
+    window.user = userEmit;
     if (this.props.currentUser) {
       window.socket.emit("challenge",user.uid,
-      user:{avatar:currentUser.avatar,name:currentUser.name}
+      userEmit
        ,user.socketid);
     }
   };

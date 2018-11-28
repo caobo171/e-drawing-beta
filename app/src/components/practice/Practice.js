@@ -16,8 +16,8 @@ class Practice extends Component {
       time: 6,
       prediction: [],
       isEnd: false,
-      star: null,
-      exp: null,
+      star: 0,
+      exp: 0,
       // Comment true to go back normally
       isNotify: true
     };

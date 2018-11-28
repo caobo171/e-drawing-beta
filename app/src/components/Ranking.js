@@ -25,6 +25,7 @@ class Ranking extends Component {
           usersShow.push(e);
         }
       });
+      console.log('cao',users);
     }
 
     console.log("cao users", users);

@@ -38,6 +38,7 @@ const userReducer = (state = initState, action) => {
        return {...state,user:action.data}
 
     case "SET_USERS_ONLINE":
+        console.log('cao',action.data)
 
        return {...state,usersOnline:action.data}
      

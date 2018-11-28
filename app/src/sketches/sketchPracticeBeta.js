@@ -41,7 +41,7 @@ export default function sketchPracticeBeta(p) {
     centralProcess.mouseReleased = () => {
       try {
         const { probs, symbols } = centralProcess.predict();
-        console.log('cao',centralProcess.symbols)
+        // console.log('cao',centralProcess.symbols)
         const predictWord = symbols[0].replace(/\s/g, "");
                 
         //    console.log("cao", symbols);
