@@ -62,10 +62,8 @@ export default function sketchTest(p) {
           centralProcess.erase();
           speech.speak("GREAT",true);
           levelUp();
-          //   speech.speak(`oh great! It is ${word.replace("_", " ")}`);
-          //   handleLevelUp(true);
         } else {
-          //speech.speak(`it's not ${predictWord.replace("_", " ")}`);
+          
           speech.speak(`it's not ${word.replace("_", " ")}`);
         }
       } catch (err) {

@@ -16,7 +16,7 @@ class TestBeta extends Component {
 
     const urlParams = new URLSearchParams(window.location.search);
     this.roomid = urlParams.get("roomid");
-    this.levelUp = this.leveUp.bind(this);
+    this.levelUp = this.levelUp.bind(this);
     this.renderWords = this.renderWords.bind(this);
     //this.handleAfter5s  = this.handleAfter5s.bind(this);
     this.renderNotify = this.renderNotify.bind(this);
@@ -73,8 +73,9 @@ class TestBeta extends Component {
   checkEndGame = () => {
     if (this.state.level > 5) {
       console.log("End game! ");
-      clearInterval(this.timer);
-
+      if (this.state.isOwner) {
+        clearInterval(this.timer);
+      }
       if (this.state.myScore > this.state.yourScore) {
         this.setState({ render: 2, exp: 700 });
         this.props.upExpByID(this.props.user.uid, 700);
@@ -89,10 +90,13 @@ class TestBeta extends Component {
         this.props.upDateWinGameByID(this.props.user.uid, -1);
       }
       console.log("long", this.state.render);
+      if (this.state.isOwner) {
+        window.socket.emit("end", this.roomid);
+      }
     }
   };
 
-  leveUp = () => {
+  levelUp = () => {
     console.log("long trying", this.state.level);
     window.socket.emit("client-level-up", this.roomid);
     if (this.state.level <= 5) {
@@ -113,6 +117,7 @@ class TestBeta extends Component {
       // dem thoi gian de doi chu moi voi ca xoa canvas
       if (this.state.time > 0) {
         this.setState({ time: this.state.time - 1 });
+        window.socket.emit("tick", this.roomid);
       } else {
         this.handleTimeOut();
       }
@@ -127,7 +132,11 @@ class TestBeta extends Component {
       await this.renderWords();
       console.log("long", this.state.words);
       window.socket.emit("client-send-word", this.state.words, this.roomid);
-      this.setState({ isOwner });
+      this.setState({ isOwner }, () => {
+        if (this.state.isOwner) {
+          this.tick();
+        }
+      });
       console.log("long", isOwner);
     });
     window.socket.on("server-set-guess", async isOwner => {
@@ -137,7 +146,36 @@ class TestBeta extends Component {
       this.setState({ isOwner });
       console.log("long", isOwner);
     });
-    this.tick();
+    window.socket.on("tick", () => {
+      if (!this.state.isOwner) {
+        if (this.state.time > 0) {
+          this.setState({ time: this.state.time - 1 });
+        } else {
+          this.handleTimeOut();
+        }
+        if (this.state.time === 15) {
+          this.setState({ render: 0 });
+        }
+      }
+    });
+
+    window.socket.on("end", () => {
+      if (!this.state.isOwner) {
+        if (this.state.myScore > this.state.yourScore) {
+          this.setState({ render: 2, exp: 700 });
+          this.props.upExpByID(this.props.user.uid, 700);
+          this.props.upDateWinGameByID(this.props.user.uid, 1);
+        } else if (this.state.myScore === this.state.yourScore) {
+          this.setState({ render: 3, exp: 50 });
+          this.props.upExpByID(this.props.user.uid, 50);
+          this.props.upDateWinGameByID(this.props.user.uid, 0);
+        } else {
+          this.setState({ render: 4, exp: -200 });
+          this.props.upExpByID(this.props.user.uid, -200);
+          this.props.upDateWinGameByID(this.props.user.uid, -1);
+        }
+      }
+    });
   }
 
   componentDidMount() {
@@ -247,8 +285,10 @@ class TestBeta extends Component {
             </ul>
           </div>
           <div className="match__timer">
-          <h3>-{this.state.time}-</h3>
-          <h3>{this.state.myScore}:{this.state.yourScore}</h3>
+            <h3>-{this.state.time}-</h3>
+            <h3>
+              {this.state.myScore}:{this.state.yourScore}
+            </h3>
           </div>
           <div className="practice__board" id="sketchPractice">
             <div className="practice__board--avatar">
