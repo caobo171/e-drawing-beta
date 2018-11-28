@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class Arena extends React.Component {
-  componentDidMount(){
-    
+  constructor(props){
+    super(props);
+    window.socket.emit('get-users-online');
   }
   handleClick = user => {
     
@@ -45,6 +46,9 @@ class Arena extends React.Component {
               <i className="fas fa-angle-double-left arena__sidebar--change-page--icon" />
               Page
               <i className="fas fa-angle-double-right arena__sidebar--change-page--icon" />
+            </div>
+            <div className="arena__sidebar--avatar">
+                <img className="arena__sidebar--avatar--img" src={this.props.currentUser.avatar}></img>
             </div>
             <img
               className="arena__sidebar--img"

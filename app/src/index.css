@@ -1,6 +1,9 @@
 /*
  * custome css
 */
+canvas{
+  cursor: wait
+}
 button:focus {outline:0;}
 
 /*  SECTIONS  ============================================================================= */
@@ -987,6 +990,7 @@ body {
 .card__avatar--img {
   width: 5rem;
   height: 5rem;
+  border-radius: 50%;
 }
 
 .form {
@@ -1345,22 +1349,23 @@ body {
 
 .notification-challenge {
   position: absolute;
+  z-index:100;
   top: 60%;
-  left: 80%;
+  left: 77%;
   background-color: #f7f7f7;
-  width: 23rem;
-  height: 23rem;
+  width: 27rem;
+  height: 21rem;
   border-radius: 2rem;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 3rem;
+  padding: 1rem 0;
   box-shadow: 0.1rem 0.2rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
   animation: moveForWard-3 0.5s linear 0.3s;
 }
 .notification-challenge__avatar {
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   margin-top: 1rem;
@@ -1372,7 +1377,7 @@ body {
 }
 .notification-challenge__avatar--group--img {
   width: 4rem;
-  height: 4srem;
+  height: 4rem;
   border-radius: 50%;
   border: 2px solid #02cba7;
   margin-right: 1rem;
@@ -1735,6 +1740,20 @@ body {
   justify-content: flex-end;
   flex-wrap: wrap;
 }
+.arena__sidebar{
+  position: relative;
+}
+.arena__side--avatar{
+
+}
+.arena__sidebar--avatar--img{
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 25rem;
+  left: 13rem;
+}
 .arena__sidebar--change-page {
   display: flex;
   justify-content: center;
@@ -1777,19 +1796,24 @@ body {
     ),
     url("./img/background2.png");
 }
+.match__canvas{
+  width: 47rem !important;
+  height: 50rem !important;
+  margin-top: -3rem !important;
+}
 .match__timer {
-  width: 10vw;
+  width: 15rem;
   height: 18rem;
   text-align: center;
   font-size: 5rem;
   background-color: #f7f7f7;
   display: flex;
-  align-content: center;
+  align-content: space-around;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 0 3rem;
-  border-radius: 10rem;
-  border: 1rem solid #02cba7;
+  margin-left: -5rem;
+  border-radius: 2rem;
+  border: .5rem solid #02cba7;
 }
 .match__timer--number {
   font-size: 5rem;
@@ -1801,11 +1825,19 @@ body {
   font-size: 4rem;
   font-weight: 700;
   position: absolute;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  top: 15%;
+  top: 20%;
   color: #333;
+}
+.match__board--left{
+   margin-left: 5rem;
+}
+.match__board--right{
+
+}
+.match--avatar{
+  padding-top: 1.5rem;
 }
 
 .ranking {

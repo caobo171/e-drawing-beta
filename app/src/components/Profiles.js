@@ -59,7 +59,7 @@ class Profile extends Component {
                           <p className="profile__character--achievement--number">
                             {(user.match && user.match>0 &&user.win)?(Number(user.win/user.match)*100):0}
                             <span className="profile__character--achievement--quote">
-                              %
+                              %stat
                             </span>
                           </p>
                         </div>

@@ -18,7 +18,7 @@ class Global extends React.Component {
         
       })
       window.socket.on("challenge", (uid, user) => {
-        console.log("cao da nhan duoc challeng", user);
+        console.log("cao da nhan duoc challenge", user);
         this.setState({ ischallenged: true, uid: uid, user });
       });
 
