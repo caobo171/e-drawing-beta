@@ -30,11 +30,14 @@ module.exports = function(io) {
       } else {
         if (
           !userOnline.find(e => {
-            return e.socketid == data.socketid && e.uid === data.uid;
+            return e.socketid === data.socketid && e.uid === data.uid;
           })
         ) {
+          let user = userOnline.find(e=>{return e.uid=== data.uid})
           console.log(userOnline.length);
-          socket.emit("user-exist");
+          console.log('user awn',user);
+          socket.to(user.socketid).emit("user-exist");
+          userOnline.push(data);
         }
       }
 

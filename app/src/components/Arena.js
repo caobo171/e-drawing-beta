@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import {limitName} from './helpers/brief';
 
 class Arena extends React.Component {
-  componentDidMount(){
-    
+  constructor(props){
+    super(props);
+    window.socket.emit('get-users-online');
   }
   handleClick = user => {
     

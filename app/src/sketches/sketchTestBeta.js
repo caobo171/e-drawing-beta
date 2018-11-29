@@ -43,6 +43,10 @@ export default function sketchTest(p) {
   p.setup = () => {
     centralProcess = new Central("canvas2", "status");
 
+    let button = document.getElementById('reset');
+    button.addEventListener('click',()=>{
+      centralProcess.erase();
+    })
     centralProcess.mouseDrag = () => {
       // console.log('cao coor',centralProcess.pointer);
 
@@ -52,20 +56,18 @@ export default function sketchTest(p) {
     centralProcess.mouseReleased = () => {
       try {
         const { probs, symbols } = centralProcess.predict();
-        //console.log("cao", centralProcess.symbols);
-        console.log("cao", symbols);
-        console.log("cao word", word);
         const predictWord = symbols[0].replace(/\s/g, "");
+        const predictWord1 = symbols[1].replace(/\s/g, "");
+        const predictWord2 = symbols[2].replace(/\s/g, "");
+        word = word.replace(/\s/g, "")
         setTable(symbols, probs);
 
-        if (predictWord === word.replace(/\s/g, "")) {
+        if (predictWord === word || predictWord1 === word || predictWord2===word ) {
           centralProcess.erase();
           speech.speak("GREAT",true);
           levelUp();
-          //   speech.speak(`oh great! It is ${word.replace("_", " ")}`);
-          //   handleLevelUp(true);
         } else {
-          //speech.speak(`it's not ${predictWord.replace("_", " ")}`);
+          
           speech.speak(`it's not ${word.replace("_", " ")}`);
         }
       } catch (err) {

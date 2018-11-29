@@ -13,6 +13,7 @@ class Global extends React.Component {
     
     if (window.socket) {
       window.socket.on('user-exist',()=>{
+        console.log('ANOTHER LOGGINED TO YOUR ACCOUNT')
         alert('Another Loggined Your Account !');
         this.props.logOut();
         

@@ -1,6 +1,9 @@
 /*
  * custome css
 */
+canvas{
+  cursor: wait
+}
 button:focus {outline:0;}
 
 /*  SECTIONS  ============================================================================= */

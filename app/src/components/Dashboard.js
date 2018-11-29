@@ -1,27 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
 import { logOut } from "../actions/authActions";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 class Dashboard extends React.Component {
-     
-   
   render() {
-    if(!this.props.auth){
-        this.props.history.push('/login');
+    if (!this.props.auth) {
+      this.props.history.push("/login");
     }
-    const { currentUser ,auth} = this.props;
+    const { currentUser, auth } = this.props;
 
     return (
       <React.Fragment>
-        {(currentUser.name && auth) ? (
+        {currentUser.name && auth ? (
           <section className="dashboard" id="dashboard">
             <div className="row">
               <div className="col span-2-of-3" />
               <div className="col span-1-of-3">
                 <ul className="nav">
-                <li className="nav__link"><strong>{currentUser.name}</strong></li>
+                  <li className="nav__link">
+                    <strong>{currentUser.name}</strong>
+                  </li>
                   <li className="nav__avatar">
                     <img
                       className="nav__avatar--img"
@@ -29,10 +28,16 @@ class Dashboard extends React.Component {
                       alt="avatar"
                     />
                   </li>
-                  <li className="nav__link"
-                  onClick={()=>{
-                      if(window.confirm('Are you sure ?')){this.props.logOut()}
-                  }}>LogOut</li>
+                  <li
+                    className="nav__link"
+                    onClick={() => {
+                      if (window.confirm("Are you sure ?")) {
+                        this.props.logOut();
+                      }
+                    }}
+                  >
+                    LogOut
+                  </li>
                 </ul>
               </div>
             </div>
@@ -62,7 +67,10 @@ class Dashboard extends React.Component {
                     </a>
                   </div>
                   <div className="dashboard__list--icon">
-                    <Link to={`/profile/${currentUser.uid}`}className="dashboard__list--icon--a">
+                    <Link
+                      to={`/profile/${currentUser.uid}`}
+                      className="dashboard__list--icon--a"
+                    >
                       <i className="fas fa-address-book" />
                       <div className="dashboard__list--caption">profile</div>
                     </Link>
@@ -99,7 +107,9 @@ class Dashboard extends React.Component {
               </div>
             </div>
           </section>
-        ):<h1>Loading...</h1>}
+        ) : (
+          <h1>Loading...</h1>
+        )}
       </React.Fragment>
     );
   }
@@ -108,7 +118,7 @@ class Dashboard extends React.Component {
 const mapStatetoProps = state => {
   return {
     currentUser: state.user.currentUser,
-    auth : state.user.auth
+    auth: state.user.auth
   };
 };
 
