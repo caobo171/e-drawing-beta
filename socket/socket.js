@@ -37,6 +37,7 @@ module.exports = function(io) {
           let user = userOnline.find(e=>{return e.uid=== data.uid})
           console.log(userOnline.length);
           console.log('user awn',user);
+          handleDisConnect(user.socketid);
           socket.to(user.socketid).emit("user-exist");
           userOnline.push(data);
         }
