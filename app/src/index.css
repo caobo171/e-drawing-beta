@@ -2128,3 +2128,28 @@ body {
   display: flex;
   align-items: center;
 }
+
+/* -------------------------NOTE----------------------- */
+.note__content{
+  width: 40rem;
+  height: 35rem;
+  padding: 1rem;
+  background-color: #eee;
+  border-radius: 1rem;
+  font-size: 1.7rem;
+}
+
+.note__close{
+   top: .5rem !important;
+   right: .5rem !important;
+}
+
+.note__content li {
+  margin: 2rem;
+}
+
+.note__title{
+  padding-bottom: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+/* ------------------------------------------------------ */

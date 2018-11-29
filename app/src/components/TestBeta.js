@@ -314,7 +314,6 @@ class TestBeta extends Component {
             </div>
             <canvas
               id="canvas3"
-
               className="match__canvas match__canvas--right"
               style={{ border: "1px , solid white", position: "absolute" }}
             />
