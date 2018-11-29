@@ -1571,6 +1571,9 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 .login__register {
   font-size: 1.5rem;
@@ -1806,9 +1809,13 @@ body {
    font-weight: 700;
 }
 .match__canvas{
-  width: 47rem !important;
+  width: 35vw !important;
   height: 50rem !important;
-  margin-top: -3rem !important;
+  margin-top: -35vh ;
+  margin: -35vh -8vw 0vh -8vw;
+  z-index: 1;
+  border-radius: 10px;
+  box-shadow: 0.1rem 0.2rem 1rem 0rem rgba(0, 0, 0, 0.2);
 }
 .match__timer {
   position: relative;
@@ -1848,6 +1855,8 @@ body {
 }
 .match--avatar{
   padding-top: 1.5rem;
+  font-size: 1.5rem;
+  margin-top: -2rem;
 }
 
 .ranking {
@@ -2031,9 +2040,8 @@ body {
 .practice__board--avatar{
    display: flex;
    align-items: center;
-   margin-top: 20px;
    position: absolute;
-   top: 0;
+   top: -23vh;
    z-index: 2;
 
 }
@@ -2054,10 +2062,11 @@ body {
 }
 .practice__canvas{
   z-index: 1;
-  margin-top: -50px;
+  margin-top: -35vh;
   border-radius: 10px;
   box-shadow: 0.1rem 0.2rem 1rem 0rem rgba(0, 0, 0, 0.2);
-
+  width: 40vw !important;
+  height: 80vh !important;
 }
 
 .practice__dashboard{

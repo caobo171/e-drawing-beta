@@ -24,7 +24,7 @@ export default class Central {
     this.canvas.backgroundColor = color;
     this.canvas.isDrawingMode = 0;
     this.canvas.freeDrawingBrush.color = "black";
-    this.canvas.freeDrawingBrush.width = 10;
+    this.canvas.freeDrawingBrush.width = 4;
     this.canvas.renderAll();
 
     this.canvas.on("mouse:up", e => {

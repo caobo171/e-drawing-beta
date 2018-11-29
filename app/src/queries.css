@@ -1,0 +1,208 @@
+
+@media only screen and (max-width: 1200px){
+    .notification-challenge{
+        left: 70vw;
+    }
+}
+@media only screen and (max-width: 1130px) {
+    .ranking__picture{
+        display: none;
+    }
+    .ranking__owner{
+        left: 20rem;
+        top: -4rem;
+    }
+    .match__canvas{
+        margin: -35vh -6vw 0vh -6vw;
+    }
+}
+@media only screen and (max-width: 986px) {
+    .col{
+        width: 100%;
+    }
+    .nav{
+        margin-left: 30%;
+    }
+    .dashboard__symbol{
+        display: none;
+    }
+    .dashboard__nav{
+        margin-left: 17%;
+        margin-top: 20%;
+    }
+    .arena__sidebar--img{
+        display: none;
+    }
+    .arena__sidebar--avatar{
+        display: none;
+    }
+    .arena__sidebar--change-page{
+        margin-bottom: 3rem;
+    }
+    .notification-challenge{
+        left: 65vw;
+    }
+    .match__canvas{
+        width: 32vw !important;
+        margin: -35vh -3vw 0vh -3vw;
+    }
+    
+}
+
+@media only screen and (max-width: 850px){
+    .pie{
+        display: none !important;
+    }
+    .practice__result--title{
+        display: none;
+    }
+    .practice__dashboard{
+        height: 50vh
+    }
+    
+    .practice__timer--clock{display: none;}
+    .practice__canvas{width: 50vw !important;}
+    .match__canvas{
+        width: 50vw !important;
+    }
+    .match__canvas--right{
+       display: none;
+    }
+    .match__score{
+        top: 20rem;
+       left: 80%;
+    }
+    .match__timer{
+       position: absolute;
+       top:30rem;
+       left: 77%;
+    }
+    .match--avatar--right{
+        left: 30%;
+    }
+}
+
+
+
+@media only screen and (max-width: 758px) {
+    .heading-secondary__icon {
+       display: none;
+    }
+    .form__submit{
+        font-size: 1.5rem;
+    }
+    .notification-challenge{
+        left: 60vw;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    /* html{font-size: 8px;} */
+    .nav{
+        margin-top: 1rem;
+    }
+    .dashboard__nav{
+       margin-top: 40% !important;
+       margin-left: 13% !important;
+   }
+   .dashboard__list{
+       margin-left: -10%;
+   }
+   .profile__character{
+       height: 50vh;
+       align-items: flex-start;
+   }
+   .profile__character--avatar{
+       top: 5vh;
+       left: 75vw;
+       width: 10rem;
+       height: 10rem;
+   }
+   .profile__character--div{
+       width: 90%;
+       margin-top: 10vh;
+   }
+   .profile__information{
+       height: 50vh;
+       width: 100vw;
+       justify-content: center;
+       margin-top: -1rem;
+   }
+   .profile__form{
+       width: 90%;
+   }
+   .notification-challenge{
+    left: 40vw;
+   }
+}
+
+@media only screen and (max-width:590px){
+    .match__canvas{
+        width: 70vw !important;
+        height: 50vh !important;
+        top: 23vh !important;
+        left: 5vw !important;
+    }
+     .match__score{
+         top: 85vh;
+        left: 30%;
+     }
+     .match__timer{
+        position: absolute;
+        top:75vh;
+        left: 70%;
+     }
+     .match--avatar--right{
+         left: 30%;
+         top: -15vh;
+     }
+}
+
+@media only screen and (max-width: 558px) {
+    .form__submit{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .practice{
+        flex-direction: column;
+        justify-items: center;
+    }
+    .practice__board--avatar{
+        margin-top: 20vh;
+    }
+    .practice__canvas{
+        margin-top: -15vh;
+        width: 80vw !important;
+        height: 60vh !important;
+        margin-left: -5vw;
+    }
+    .practice__dashboard{
+       flex-direction: row;
+       height: 30vh;
+       margin-top: 15vh;
+       margin-left: 5vw;
+    }
+    .notification-challenge{
+        left: 30vw;
+       }
+}
+
+@media only screen and (max-width: 400px){
+    html{
+        font-size: 8px;
+    }
+    .ranking__dashboard{
+        width: 100vw;
+        height: 85vh;
+        border-radius: 0;
+    }
+    .ranking__owner{
+        top: -23vh;
+        left: 38vw;
+    }
+    .notification-challenge{
+        top: 65vh;
+        height: 25rem;
+    }
+}

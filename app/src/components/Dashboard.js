@@ -17,9 +17,6 @@ class Dashboard extends React.Component {
       <React.Fragment>
         {(currentUser.name && auth) ? (
           <section className="dashboard" id="dashboard">
-            <a href="#popup-sidebar-user" className="list--btn">
-              <i className="fas fa-bars list--btn--icon" />
-            </a>
             <div className="row">
               <div className="col span-2-of-3" />
               <div className="col span-1-of-3">
