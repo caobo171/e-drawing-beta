@@ -9,6 +9,7 @@ module.exports = function(io) {
   };
   io.on("connection", socket => {
     console.log("co nguoi ket noi" + socket.id);
+
     //socket.join("test-room");
     socket.on("ok", () => {
       console.log("ok", socket.id);
@@ -43,6 +44,10 @@ module.exports = function(io) {
 
       io.sockets.emit("get-users", userOnline);
     });
+
+    socket.on('get-users-online',()=>{
+      socket.emit('get-users',userOnline);
+    })
 
     socket.on("logout-user", data => {
        handleDisConnect(data.socketid);

@@ -8,6 +8,7 @@ class Arena extends React.Component {
   constructor(props){
     super(props);
     window.socket.emit('get-users-online');
+    console.log('gget users online')
   }
   handleClick = user => {
     

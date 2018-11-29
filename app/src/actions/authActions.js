@@ -61,6 +61,7 @@ export const logIn = (facebook) => {
       })
       .catch(error => {
         console.log(error);
+        alert(error.message);
         dispatch({ type: "GET_CURRENT_USER_SUCCESS", data: null });
       });
   };
