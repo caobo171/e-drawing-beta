@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { getUsers } from "./../actions/userActions";
 import { Link } from "react-router-dom";
 import { levelProcess } from './../sketches/levelprocess';
+
+import {limitName} from './helpers/brief';
 class Ranking extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +63,7 @@ class Ranking extends Component {
                           alt="avatar"
                           className="table__item__link--img"
                         />
-                        <p className="table__item__link--name">{user.name}</p>
+                        <p className="table__item__link--name">{limitName(user.name)}</p>
                       </Link>
                       <div className="table__item--score">{user.exp}</div>
                       <div className="table__item--award">{levelProcess(user.exp)}</div>

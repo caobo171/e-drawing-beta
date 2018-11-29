@@ -32,8 +32,11 @@ class Login extends Component {
       <React.Fragment>
         <section className="login" id="login">
           <div className="login__form form">
-            <i className="heading-secondary__icon fas fa-paint-brush" />
+          <div>
+          <i className="heading-secondary__icon fas fa-paint-brush" />
             <h2 className="heading-secondary">Edrawing FIGHT</h2>
+          </div>
+           
             <input
               className="form__submit login_login btn"
               type="submit"

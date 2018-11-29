@@ -169,8 +169,8 @@ class Practice extends Component {
                   />
                   <canvas
                     id="canvas1"
-                    width="520%"
-                    height="530%"
+                    // width="520%"
+                    // height="530%"
                     className="practice__canvas"
                     style={{
                       border: "1px , solid white",

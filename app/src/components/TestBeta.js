@@ -230,11 +230,11 @@ class TestBeta extends Component {
     return (
       <div>
         <section className="practice">
-          <div
-            className="practice__board match__board--left"
-            id="sketchPractice"
-          >
-            <div className="practice__board--avatar match--avatar">
+
+          <div className="practice__board match__board--left" id="sketchPractice">
+           
+            <div className="practice__board--avatar match--avatar match--avatar--left">
+
               <div className="practice__board--avatar--name">{user.name}</div>
               <img
                 className="practice__board--avatar--img"
@@ -254,13 +254,12 @@ class TestBeta extends Component {
             </div>
             <canvas
               id="canvas2"
-              width="520%"
-              height="530%"
-              className="practice__canvas match__canvas"
+          
+              className="match__canvas match__canvas--left"
               style={{ border: "1px , solid white", position: "absolute" }}
             />
           </div>
-          <div className="match__score" id="status" />
+          {/* <div className="match__score" id="status" /> */}
           <div className="match__score">
             {/* <div className="pieID pie" /> */}
             <ul className="pieID legend">
@@ -295,11 +294,9 @@ class TestBeta extends Component {
               {this.state.myScore} : {this.state.yourScore}
             </h3>
           </div>
-          <div
-            className="practice__board match__board--right"
-            id="sketchPractice"
-          >
-            <div className="practice__board--avatar match--avatar">
+          <div className="practice__board match__board--right" id="sketchPractice">
+            <div className="practice__board--avatar match--avatar match--avatar--right">
+
               <div className="practice__board--avatar--name">Opponent</div>
               <img
                 className="practice__board--avatar--img"
@@ -317,9 +314,8 @@ class TestBeta extends Component {
             </div>
             <canvas
               id="canvas3"
-              width="520%"
-              height="530%"
-              className="practice__canvas match__canvas"
+
+              className="match__canvas match__canvas--right"
               style={{ border: "1px , solid white", position: "absolute" }}
             />
           </div>

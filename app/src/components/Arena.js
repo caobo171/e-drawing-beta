@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
+import {limitName} from './helpers/brief';
+
 class Arena extends React.Component {
   constructor(props){
     super(props);
@@ -74,7 +76,7 @@ class Arena extends React.Component {
                       alt="avatar"
                     />
                   </div>
-                  <div className="card__name">{user.name}</div>
+                  <div className="card__name">{limitName(user.name)}</div>
                   <div className="card__btn btn">
                     <div
                       className="card__btn--icon"
