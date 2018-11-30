@@ -16,6 +16,15 @@ import store from "./store";
 
 import "./App.css";
 
+function changeUrl(){
+  console.log('AAAAA');
+  if(window.location.href != window.location.origin+'/'){
+   window.location = window.location.origin;
+  }
+}
+window.onload = changeUrl
+
+
 class App extends Component {
   render() {
     return (

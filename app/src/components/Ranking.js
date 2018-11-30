@@ -14,21 +14,27 @@ class Ranking extends Component {
     this.props.getUsers();
   }
   render() {
-    const { users, user } = this.props;
+    let { users, user } = this.props;
     console.log("cao currentUser", user);
     let rank = 5;
     let usersShow = [];
+    window.users = users
+    
     if (user) {
-      users.forEach((e, i) => {
+      users= users.sort((a,b)=> a.exp<b.exp)
+      for(let i=0;i<users.length;i++){
+        const e = users[i];
         if (e.uid === user.uid) {
           rank = i;
         }
         if ((i >= this.state.page * 5) && i < (this.state.page * 5 + 5)) {
           usersShow.push(e);
         }
-      });
+      };
       console.log('cao',users);
     }
+    usersShow = usersShow.sort((a,b)=>a.exp<b.exp)
+    
 
     console.log("cao users", users);
     return (
