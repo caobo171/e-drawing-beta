@@ -33,6 +33,7 @@ class Ranking extends Component {
       };
       console.log('cao',users);
     }
+    window.usersShow = usersShow;
     usersShow = usersShow.sort((a,b)=>a.exp<b.exp)
     
 
