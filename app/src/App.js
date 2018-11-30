@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route ,HashRouter} from "react-router-dom";
 
 
 import Login from "./components/auth/Login";
@@ -16,20 +16,14 @@ import store from "./store";
 
 import "./App.css";
 
-function changeUrl(){
-  console.log('AAAAA');
-  if(window.location.href != window.location.origin+'/'){
-   window.location = window.location.origin;
-  }
-}
-window.onload = changeUrl
+
 
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <HashRouter>
             <div className="App">
               <Route path="/" component ={Global}/>
               <Route path="/" exact component={Dashboard} />
@@ -43,7 +37,7 @@ class App extends Component {
             </div>
             
       
-        </Router>
+        </HashRouter>
       </Provider>
     );
   }
