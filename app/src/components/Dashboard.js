@@ -124,7 +124,7 @@ class Dashboard extends React.Component {
                         onClick={e=>{
                           e.preventDefault()
                           this.setState({open:false})
-                        }}> >&times;</a>
+                        }}> &times;</a>
                         <li>
                           <em>You have <strong>15s</strong> each part of match to draw the image.</em>      
                         </li>
