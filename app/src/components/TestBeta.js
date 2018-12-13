@@ -10,6 +10,8 @@ import DrawNotify from "./notifies/drawNotify";
 import Central from "../sketches/centralprocess";
 import { upExpByID, upDateWinGameByID } from "./../actions/userActions";
 
+import {limitName} from './helpers/brief'
+
 class TestBeta extends Component {
   constructor(props) {
     super(props);
@@ -249,7 +251,7 @@ class TestBeta extends Component {
            
             <div className="practice__board--avatar match--avatar match--avatar--left">
 
-              <div className="practice__board--avatar--name">{user.name}</div>
+              <div className="practice__board--avatar--name">{limitName(user.name)}</div>
               <img
                 className="practice__board--avatar--img"
                 src={user.avatar}

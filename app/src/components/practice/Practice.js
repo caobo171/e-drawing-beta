@@ -6,6 +6,8 @@ import Central from "../../sketches/centralprocess";
 import WordNotify from "./WordNotify";
 import { upExpByID } from "../../actions/userActions";
 
+import {limitName} from '../helpers/brief'
+
 class Practice extends Component {
   constructor(props) {
     super(props);
@@ -152,7 +154,7 @@ class Practice extends Component {
                 <div className="practice__board" id="sketchPractice">
                   <div className="practice__board--avatar">
                     <div className="practice__board--avatar--name">
-                      {user.name}
+                      {limitName(user.name)}
                     </div>
                     <img
                       className="practice__board--avatar--img"

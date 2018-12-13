@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route ,HashRouter} from "react-router-dom";
 
+import {UserIsAuthenticated, UserIsNotAuthenticated} from './components/helpers/auth'
 
 import Login from "./components/auth/Login";
 import Arena from './components/Arena';
@@ -25,15 +26,15 @@ class App extends Component {
       <Provider store={store}>
         <HashRouter>
             <div className="App">
-              <Route path="/" component ={Global}/>
-              <Route path="/" exact component={Dashboard} />
-              <Route path="/login" exact component={Login} />
-              <Route path = "/arena" exact component = {Arena}/>
-              <Route path = "/profile/:id" exact component = {Profile}/>
-              <Route path="/testplay"exact component={TestBeta}/>
-              <Route path = "/profile" exact component = {Profile}/>
-              <Route path = "/practice" exact component = {Practice}/>
-              <Route path = "/ranking" exact component = {Ranking}/>
+              <Route path="/" component ={UserIsAuthenticated(Global)}/>
+              <Route path="/" exact component={UserIsAuthenticated(Dashboard)} />
+              <Route path="/login" exact component={UserIsNotAuthenticated(Login)} />
+              <Route path = "/arena" exact component = {UserIsAuthenticated(Arena)}/>
+              <Route path = "/profile/:id" exact component = {UserIsAuthenticated(Profile)}/>
+              <Route path="/testplay"exact component={UserIsAuthenticated(TestBeta)}/>
+              <Route path = "/profile" exact component = {UserIsAuthenticated(Profile)}/>
+              <Route path = "/practice" exact component = {UserIsAuthenticated(Practice)}/>
+              <Route path = "/ranking" exact component = {UserIsAuthenticated(Ranking)}/>
             </div>
             
       
