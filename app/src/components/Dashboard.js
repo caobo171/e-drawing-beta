@@ -4,6 +4,9 @@ import { logOut } from "../actions/authActions";
 import { Link } from "react-router-dom";
 
 class Dashboard extends React.Component {
+  state = {
+    open : false 
+  }
   render() {
     if (!this.props.auth) {
       this.props.history.push("/login");
@@ -62,7 +65,11 @@ class Dashboard extends React.Component {
                     </a>
                   </div>
                   <div className="dashboard__list--icon">
-                    <a href="#popup" className="dashboard__list--icon--a">
+                    <a href="#popup" className="dashboard__list--icon--a"
+                     onClick={e=>{
+                       e.preventDefault()
+                       this.setState({open:true})
+                     }}>
                       <i className="fas fa-edit" />
                       <div className="dashboard__list--caption">notes</div>
                     </a>
@@ -108,24 +115,33 @@ class Dashboard extends React.Component {
               </div>
             </div>
           </section>
-          <div className="note popup" id="popup">
-              <ul className="popup__content note__content">
-                <h2 className="heading-secondary note__title">Notes</h2>
-                <a href="#" className="popup__close note__close">&times;</a>
-                <li>
-                  <em>You have <strong>15s</strong> each part of match to draw the image.</em>      
-                </li>
-                <li>
-                  <em>
-                  if your image is in <strong>3 tops</strong> of prediction. <br/>You're faster than your opponent, you're win.
-                  </em>
-              
-                </li>
-                <li>
-                  <em>Keep practicing, you just need some line-drawing to win. <br/> Optimize your time !</em>
-                </li>
-              </ul>
-          </div>
+          <React.Fragment>
+            {this.state.open && (
+                  <div className="note note__popup" id="popup">
+                      <ul className="note__popup--content note__content">
+                        <h2 className="heading-secondary note__title">Notes</h2>
+                        <a href="#2" className="popup__close note__close"
+                        onClick={e=>{
+                          e.preventDefault()
+                          this.setState({open:false})
+                        }}> >&times;</a>
+                        <li>
+                          <em>You have <strong>15s</strong> each part of match to draw the image.</em>      
+                        </li>
+                        <li>
+                          <em>
+                          if your image is in <strong>3 tops</strong> of prediction. <br/>You're faster than your opponent, you're win.
+                          </em>
+                      
+                        </li>
+                        <li>
+                          <em>Keep practicing, you just need some line-drawing to win. <br/> Optimize your time !</em>
+                        </li>
+                      </ul>
+                  </div>  
+            )}
+          </React.Fragment>
+
           </React.Fragment>
          
         ) : (

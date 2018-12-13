@@ -4,21 +4,20 @@ import { Link } from "react-router-dom";
 
 import {limitName} from './helpers/brief';
 
+
 class Arena extends React.Component {
   constructor(props){
     super(props);
     window.socket.emit('get-users-online');
-    console.log('gget users online')
   }
   handleClick = user => {
     
     // window.user = this.props.currentUser;
     const {currentUser} = this.props;
     const userEmit = {avatar:currentUser.avatar,name:currentUser.name};
-    console.log("long ấy user", user,userEmit);
     window.user = userEmit;
     if (this.props.currentUser) {
-      window.socket.emit("challenge",user.uid,
+      window.socket.emit("challenge",currentUser.uid,
       userEmit
        ,user.socketid);
     }
@@ -27,7 +26,6 @@ class Arena extends React.Component {
     if (!this.props.auth) {
       this.props.history.push("/");
     }
-    console.log("long check usersssss", this.props.usersOnline);
     return (
       <section className="arena">
         <Link

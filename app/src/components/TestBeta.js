@@ -15,7 +15,8 @@ class TestBeta extends Component {
     super(props);
 
     const urlParams = new URLSearchParams(window.location.search);
-    this.roomid = urlParams.get("roomid");
+    //window.url = urlParams
+    this.roomid = window.location.hash.split('=')[1]
     this.levelUp = this.levelUp.bind(this);
     this.renderWords = this.renderWords.bind(this);
     //this.handleAfter5s  = this.handleAfter5s.bind(this);
@@ -116,8 +117,10 @@ class TestBeta extends Component {
     this.timer = setInterval(() => {
       // dem thoi gian de doi chu moi voi ca xoa canvas
       if (this.state.time > 0) {
-        this.setState({ time: this.state.time - 1 });
-        window.socket.emit("tick", this.roomid);
+        this.setState((state)=>{ return { time: state.time - 1} },()=>{
+          window.socket.emit("tick", this.roomid , this.state.time);
+        });
+        
       } else {
         this.handleTimeOut();
       }
@@ -132,8 +135,10 @@ class TestBeta extends Component {
   componentDidMount() {
     window.socket.on("server-set-owner", async isOwner => {
       await this.renderWords();
-      console.log("long", this.state.words);
+      console.log('check AAAAA');
+     
       window.socket.emit("client-send-word", this.state.words, this.roomid);
+      console.log('long',this.roomid)
       this.setState({ isOwner }, () => {
         if (this.state.isOwner) {
           this.tick();
@@ -143,15 +148,16 @@ class TestBeta extends Component {
     });
     window.socket.on("server-set-guess", async isOwner => {
       await window.socket.on("server-send-word", words => {
-        this.setState({ words });
+
+        this.setState({ words },()=>console.log('long',this.state));
       });
       this.setState({ isOwner });
       console.log("long", isOwner);
     });
-    window.socket.on("tick", () => {
+    window.socket.on("tick", (time) => {
       if (!this.state.isOwner) {
         if (this.state.time > 0) {
-          this.setState({ time: this.state.time - 1 });
+          this.setState({ time });
         } else {
           this.handleTimeOut();
         }
@@ -160,6 +166,12 @@ class TestBeta extends Component {
         }
       }
     });
+
+    window.socket.on('out-game',()=>{
+      this.setState({ render: 2, exp: 700 });
+      this.props.upExpByID(this.props.user.uid, 700);
+      this.props.upDateWinGameByID(this.props.user.uid, 1);
+    })
 
     window.socket.on("end", () => {
       if (!this.state.isOwner) {
@@ -200,6 +212,8 @@ class TestBeta extends Component {
 
   componentWillUnmount() {
     clearInterval();
+    window.socket.emit('out-game',this.roomid)
+    console.log('check okay')
   }
 
   renderNotify() {

@@ -69,14 +69,14 @@ class Global extends React.Component {
               </p>
 
               <a
-                href="#2"
+                
                 className="btn-teal"
                 onClick={() => this.handleAccept()}
               >
                 accept
               </a>
               <a
-                href="#2"
+                
                 className="btn-blue"
                 onClick={() => this.handlerDecline()}
               >
