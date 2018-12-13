@@ -75,7 +75,7 @@ class Arena extends React.Component {
                       alt="avatar"
                     />
                   </div>
-                  <div className="card__name">{limitName(user.name)}</div>
+                  <div className="card__name">{user.name?limitName(user.name):user.name}</div>
                   <div className="card__btn btn">
                     <div
                       className="card__btn--icon"
